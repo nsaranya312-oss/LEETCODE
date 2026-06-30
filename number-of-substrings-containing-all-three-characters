@@ -1,0 +1,31 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n=s.length();
+       int c=0;
+       int i=0;
+       int j=0;
+       char[] t=s.toCharArray();
+       HashMap<Character,Integer>a=new HashMap<>();
+       HashMap<Character,Integer>b=new HashMap<>();
+       a.put('a',1);
+        a.put('b',1);
+        a.put('c',1);
+       while(j<n){
+        if(b.containsKey(t[j])){
+        b.put(t[j],b.get(t[j])+1);
+        }
+        else{
+        b.put(t[j],1);
+         }
+         while(a.size()==b.size()){
+           b.put(t[i],b.get(t[i])-1);
+            if(b.get(t[i])<=0)b.remove(t[i]);
+            c+=n-j;
+            i++;
+         }
+         j++;
+
+       }
+       return c;
+    }
+}
