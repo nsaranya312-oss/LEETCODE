@@ -1,0 +1,18 @@
+class Solution {
+    void fun(int i,int[]nums,List<Integer>v1,List<List<Integer>>ans){
+        if(i>=nums.length){
+            ans.add(new ArrayList<>(v1));
+            return;
+        }
+        List<Integer>op=new ArrayList<>(v1);
+        op.add(nums[i]);
+        fun(i+1,nums,op,ans);
+        fun(i+1,nums,v1,ans);
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>>ans=new ArrayList<>();
+        List<Integer>v1=new ArrayList<>();
+        fun(0,nums,v1,ans);
+        return ans;
+    }
+}
