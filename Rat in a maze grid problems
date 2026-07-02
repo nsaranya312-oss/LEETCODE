@@ -1,0 +1,65 @@
+class Solution {
+    
+    int dir[][]={{1,0},{0,1},{-1,0},{0,-1}};
+    
+    void fun(int x,int y,String path,ArrayList<String>ans,int [][]grid){
+        int n=grid.length;
+        int m=grid[0].length;
+        
+        if(x==n-1 && y==m-1){
+            ans.add(path);
+            return ;
+        }
+        
+        int nx,ny;
+        
+        nx=x+1;
+        ny=y;
+        if(nx<n && nx>=0 && ny<m && ny>=0 && grid[nx][ny]==1){
+            grid[nx][ny]=0;
+            fun(nx,ny,path+"D",ans,grid);
+            grid[nx][ny]=1;
+        }
+        
+        nx=x;
+        ny=y-1;
+        if(nx<n && nx>=0 && ny<m && ny>=0 && grid[nx][ny]==1){
+            grid[nx][ny]=0;
+            fun(nx,ny,path+"L",ans,grid);
+            grid[nx][ny]=1;
+        }
+        
+        nx=x;
+        ny=y+1;
+        if(nx<n && nx>=0 && ny<m && ny>=0 && grid[nx][ny]==1){
+            grid[nx][ny]=0;
+            fun(nx,ny,path+"R",ans,grid);
+            grid[nx][ny]=1;
+        }
+        
+        nx=x-1;
+        ny=y;
+        if(nx<n && nx>=0 && ny<m && ny>=0 && grid[nx][ny]==1){
+            grid[nx][ny]=0;
+            fun(nx,ny,path+"U",ans,grid);
+            grid[nx][ny]=1;
+        }
+    }
+    
+    public ArrayList<String> ratInMaze(int[][] maze) {
+        int n=maze.length;
+        int m=maze[0].length;
+        
+        ArrayList<String>ans=new ArrayList<>();
+        
+        if(maze[0][0]==0 || maze[n-1][m-1]==0){
+            return ans;
+        }
+        
+        maze[0][0]=0;
+        fun(0,0,"",ans,maze);
+        maze[0][0]=1;
+        
+        return ans;
+    }
+}
