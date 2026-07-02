@@ -1,0 +1,28 @@
+class Solution {
+    void fun(int i,int[]nums,List<Integer>v1,List<List<Integer>>ans,int t,int s){
+        if(s==t){
+           ans.add(new ArrayList<>(v1));
+           return; 
+        }
+         if(i>=nums.length || s>t){
+            return;
+        }
+        List<Integer>op=new ArrayList<>(v1);
+        op.add(nums[i]);
+        fun(i+1,nums,op,ans,t,s+nums[i]);
+        // to ommit the duplicates in array in NOT TAKE CASE to avoid duplicate array
+        int j=i+1;
+        while(j<nums.length && nums[j]==nums[i]){
+            j++;
+        }
+        fun(j,nums,v1,ans,t,s);
+    }
+    public List<List<Integer>> combinationSum2(int[] nums, int target) {
+         List<List<Integer>>ans=new ArrayList<>();
+         Arrays.sort(nums);
+        List<Integer>v1=new ArrayList<>();
+        int sum=0;
+        fun(0,nums,v1,ans,target,sum);
+        return ans;
+    }
+}
