@@ -1,0 +1,29 @@
+class Solution {
+    void fun(int i,int[]nums,List<Integer>v1,List<List<Integer>>ans,int s,int tar,int k){
+        if(s==tar){
+           if(v1.size()==k){
+           ans.add(new ArrayList<>(v1));
+            }
+           return; 
+        }
+        if(i>=nums.length || s>tar || v1.size()>k){
+            return;
+        }
+        List<Integer>op=new ArrayList<>(v1);
+        op.add(nums[i]);
+        fun(i+1,nums,op,ans,s+nums[i],tar,k);
+        fun(i+1,nums,v1,ans,s,tar,k);
+        
+    }
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>>ans=new ArrayList<>();
+        int[] nums=new int[9];
+        for(int i=0;i<9;i++){
+            nums[i]=i+1;
+        }
+        List<Integer>v1=new ArrayList<>();
+        int sum=0;
+        fun(0,nums,v1,ans,0,n,k);
+        return ans;
+    }
+}
