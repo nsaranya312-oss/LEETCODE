@@ -1,0 +1,17 @@
+class Solution {
+    public static void subsets(int i,String ans,ArrayList<String>a,String s){
+        if(i==s.length()){
+            a.add(ans);
+            return;
+        }
+        subsets(i+1,ans+s.charAt(i),a,s);
+        subsets(i+1,ans,a,s);
+    }
+    public ArrayList<String> powerSet(String s) {
+        // code here
+        ArrayList<String>a=new ArrayList<>();
+        String ans="";
+        subsets(0,ans,a,s);
+        return a;
+    }
+}
